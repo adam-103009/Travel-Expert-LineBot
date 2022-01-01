@@ -25,7 +25,7 @@ class TocMachine(GraphMachine):
     def is_going_to_choose_city_East(self, event):
         return event.message.text == "東部/離島" 
     def is_going_to_choose_area(self,event):
-        return event.message.text.lower()=="back"
+        return event.message.text == "返回"
     def is_going_to_Keelung_City(self,event):
         return event.message.text == "基隆市"
     def is_going_to_New_Taipei_City(self,event):
@@ -97,6 +97,7 @@ class TocMachine(GraphMachine):
         send_button_message(event.reply_token, title, text, btn)
     def on_enter_choose_city_North(self, event):
         print("I'm entering choose_city_North")
+        #self.turn_to_initial(event)
         channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
         line_bot_api = LineBotApi(channel_access_token)
         template_message = TemplateSendMessage(
@@ -163,6 +164,16 @@ class TocMachine(GraphMachine):
                         )
                     ]
                     ),
+                    CarouselColumn(
+                    title="重新選擇地區",
+                    text="北、中、南、東、離島",
+                    actions=[
+                        MessageTemplateAction(
+                        label = '確認',
+                        text = '返回'
+                        )
+                    ]
+                    )
                 ]
             )
         )         
@@ -225,6 +236,16 @@ class TocMachine(GraphMachine):
                         )
                     ]
                     ),
+                    CarouselColumn(
+                    title="重新選擇地區",
+                    text="北、中、南、東、離島",
+                    actions=[
+                        MessageTemplateAction(
+                        label = '確認',
+                        text = '返回'
+                        )
+                    ]
+                    )
                 ]
             )
         )         
@@ -232,6 +253,7 @@ class TocMachine(GraphMachine):
         send_text_message(event.reply_token,"your choose:"+event.message.text)
     def on_enter_choose_city_South(self, event):
         print("I'm entering choose_city_South")
+        self.turn_to_initial(event)
         channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
         line_bot_api = LineBotApi(channel_access_token)
         template_message = TemplateSendMessage(
@@ -274,6 +296,16 @@ class TocMachine(GraphMachine):
                     actions=[MessageTemplateAction(
                         label = '確認',
                         text = '嘉義縣/市'
+                        )
+                    ]
+                    ),
+                    CarouselColumn(
+                    title="重新選擇地區",
+                    text="北、中、南、東、離島",
+                    actions=[
+                        MessageTemplateAction(
+                        label = '確認',
+                        text = '返回'
                         )
                     ]
                     )
@@ -359,6 +391,16 @@ class TocMachine(GraphMachine):
                         text = '馬祖'
                         )
                     ]
+                    ),
+                    CarouselColumn(
+                    title="重新選擇地區",
+                    text="北、中、南、東、離島",
+                    actions=[
+                        MessageTemplateAction(
+                        label = '確認',
+                        text = '返回'
+                        )
+                    ]
                     )
                 ]
             )
@@ -367,47 +409,47 @@ class TocMachine(GraphMachine):
         send_text_message(event.reply_token,"your choose:"+event.message.text)
 
     def on_enter_Keelung_City(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_New_Taipei_City(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Taipei_City(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Taoyuan_City(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Hsinchu(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Miaoli(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Taichung_City(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Changhua(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text) 
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text) 
     def on_enter_Nantou(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)    
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)    
     def on_enter_Yunlin_County(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Chiayi(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Tainan_City(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Kaohsiung_City(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Pingtung(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Yilan(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Hualien(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text) 
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text) 
     def on_enter_Taitung(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)  
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)  
     def on_enter_Penghu_County(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Green_Island(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)   
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)   
     def on_enter_Orchid_Island(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text) 
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text) 
     def on_enter_Kinmen_County(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text) 
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text) 
     def on_enter_Matsu(self,event):
-        send_text_message(event.reply_token,"your choose:"+event.message.text)
+        send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     

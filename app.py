@@ -182,11 +182,12 @@ machine = TocMachine(
             "conditions": "is_going_to_Matsu",
         },
         {"trigger": "advance",
-         "source": ["choose_city_North","choose_city_East","choose_city_South","choose_city_Middle"], 
+         "source": ["choose_city_North","choose_city_East","choose_city_South","choose_city_Middle","Keelung_City","New_Taipei_City","Taipei_City","Taoyuan_City",
+            "Hsinchu","Miaoli","Taichung_City","Changhua","Nantou","Yunlin_County","Chiayi","Tainan_City","Kaohsiung_City","Pingtung","Yilan","Hualien",
+            "Taitung","Penghu_County","Green_Island","Orchid_Island","Kinmen_County","Matsu"], 
          "dest": "choose_area",
          "conditions": "is_going_to_choose_area"
-        }
-        
+        },
     ],
     initial="choose_area",
     auto_transitions=False,
@@ -208,33 +209,6 @@ if channel_access_token is None:
 
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
-
-
-@app.route("/callback", methods=["POST"])
-def callback():
-    signature = request.headers["X-Line-Signature"]
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-
-    # parse webhook body
-    try:
-        events = parser.parse(body, signature)
-    except InvalidSignatureError:
-        abort(400)
-
-    # if event is MessageEvent and message is TextMessage, then echo text
-    for event in events:
-        if not isinstance(event, MessageEvent):
-            continue
-        if not isinstance(event.message, TextMessage):
-            continue
-
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.message.text)
-        )
-
-    return "OK"
 
 
 @app.route("/webhook", methods=["POST"])
@@ -284,6 +258,11 @@ def webhook_handler():
                     ),
                 ]
                 send_button_message(event.reply_token, title, text, btn)
+            elif (machine.state=="choose_city_North" or machine.state=="choose_city_East" or 
+                machine.state=="choose_city_Middle"or machine.state=="choose_city_South"):
+                send_text_message(event.reply_token,"請選擇想要查詢的城市\n或者輸入想查詢的城市名稱\n輸入「返回」可回到地區選擇選單")
+
+
 
     return "OK"
 
