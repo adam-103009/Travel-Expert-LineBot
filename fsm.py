@@ -13,10 +13,10 @@ from linebot.models import (
     CarouselTemplate, 
     CarouselColumn,
 )
-session = HTMLSession()
+'''session = HTMLSession()
 url = "https://www.youtube.com/results?search_query=台中景點"
 response = session.get(url)
-response.html.render(sleep=1, keep_page = True, scrolldown = 0)
+response.html.render(sleep=1, keep_page = True, scrolldown = 0)'''
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
