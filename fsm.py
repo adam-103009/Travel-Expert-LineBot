@@ -105,7 +105,7 @@ class TocMachine(GraphMachine):
             template = CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                    thumbnail_image_url='https://imgs.gvm.com.tw/upload/gallery/20211025/83476_04.jpg',
+                    #thumbnail_image_url='https://imgs.gvm.com.tw/upload/gallery/20211025/83476_04.jpg',
                     title="基隆市",
                     text="查詢基隆市旅遊資訊",
                     actions=[
