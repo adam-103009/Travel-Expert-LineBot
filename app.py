@@ -8,7 +8,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 from fsm import TocMachine
-from utils import send_text_message,send_button_message
+from utils import send_image_message, send_text_message,send_button_message
 from linebot.models import (
     MessageEvent,
     TextSendMessage,
@@ -236,6 +236,8 @@ def webhook_handler():
         print("REQUEST BODY: \n"+body)
         response = machine.advance(event)
         if response == False:
+            if event.message.text.lower()=='fsm':
+                send_image_message(event.reply_token,'https://travel-expert-libebot.herokuapp.com//show-fsm')
             if machine.state=="choose_area":
                 title="選擇你想查詢的地區"
                 text="北、中、南、東"
