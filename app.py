@@ -237,7 +237,7 @@ def webhook_handler():
         response = machine.advance(event)
         if response == False:
             if event.message.text.lower()=='fsm':
-                send_image_message(event.reply_token,'https://cdn.hk01.com/di/media/images/2889837/org/4ef07fed4a8836f3ed6df68bbfc7d0c9.jpg/nAAal3F-2QSZICGJCFefX31f_bD3NTZhM-WgQjPloEI?v=w1920')
+                send_image_message(event.reply_token,'https://travel-expert-libebot.herokuapp.com/show-fsm')
             if machine.state=="choose_area":
                 title="選擇你想查詢的地區"
                 text="北、中、南、東"
