@@ -1,7 +1,7 @@
 from transitions.extensions import GraphMachine
 from linebot import LineBotApi, WebhookParser
 import os
-from requests_html import HTMLSession
+#from requests_html import HTMLSession
 
 from utils import send_text_message,send_button_message
 from linebot.models import (
@@ -426,7 +426,8 @@ class TocMachine(GraphMachine):
     def on_enter_Miaoli(self,event):
         send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
     def on_enter_Taichung_City(self,event):
-        c=5
+        res="輸入“返回”可回到地區選單\n旅遊資訊"
+        '''c=5
         link=[]
         for links in response.html.find('a#video-title'):
             if c==0:
@@ -436,7 +437,7 @@ class TocMachine(GraphMachine):
         res="輸入“返回”可回到地區選單\n旅遊資訊"
         for i in range(len(link)):
             res=res+link[i]+'\n'
-        print(res)
+        print(res)'''
         send_text_message(event.reply_token,res)
     def on_enter_Changhua(self,event):
         send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text) 
