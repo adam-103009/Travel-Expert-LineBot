@@ -468,4 +468,4 @@ class TocMachine(GraphMachine):
         send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text) 
     def on_enter_Matsu(self,event):
         send_text_message(event.reply_token,"輸入“返回”可回到地區選單\n旅遊資訊:"+event.message.text)
-    
+     
