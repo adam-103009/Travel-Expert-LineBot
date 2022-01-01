@@ -14,7 +14,10 @@ from linebot.models import (
 
 channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
 
-
+session = HTMLSession()
+url = "https://www.youtube.com/results?search_query=台中景點"
+response = session.get(url)
+response.html.render(sleep=1, keep_page = True, scrolldown = 0)
 def send_text_message(reply_token, text):
     line_bot_api = LineBotApi(channel_access_token)
     line_bot_api.reply_message(reply_token, TextSendMessage(text=text))
@@ -59,10 +62,6 @@ def send_image_message(reply_token, url):
     )
     line_bot_api.reply_message(reply_token, message)
 def get_url():
-    session = HTMLSession()
-    url = "https://www.youtube.com/results?search_query=台中景點"
-    response = session.get(url)
-    response.html.render(sleep=1, keep_page = True, scrolldown = 0)
     res="輸入“返回”可回到地區選單\n旅遊資訊"
     c=5
     link=[]
