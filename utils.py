@@ -28,7 +28,7 @@ def send_button_message(reply_token, title, text, btn):
             title = title,
             text = text,
             actions = btn,
-            thumbnailImageUrl='https://cdn.xxl.thumbs.canstockphoto.com.tw/%E5%BB%BA%E7%AF%89%E7%89%A9-%E5%9C%B0%E5%9C%96-%E5%82%B3%E7%B5%B1-%E4%BA%9E%E6%B4%B2%E4%BA%BA-%E5%8F%B0%E7%81%A3-%E5%8D%A1%E9%80%9A-%E7%BE%8E%E5%B7%A5%E5%90%91%E9%87%8F_csp50402860.jpg'
+            thumbnail_image_url="https://lh3.googleusercontent.com/proxy/cbC-pT9oRgfisa75Z_JA3FOBwzxrEJEMt1ElrtQD4LXSNaePPyjRAjyIjAQoKt0Laalke0kjUySo_kwloJyy1aap3cLcrZL9lUUbRTnf6C5f6b61LL5FTl8ZS5NLZI8aBg"
         )
     )
     line_bot_api.reply_message(reply_token, message)
