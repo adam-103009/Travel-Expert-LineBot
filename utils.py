@@ -28,7 +28,7 @@ def send_button_message(reply_token, title, text, btn):
             title = title,
             text = text,
             actions = btn,
-            thumbnailImageUrl="https://lh3.googleusercontent.com/proxy/cbC-pT9oRgfisa75Z_JA3FOBwzxrEJEMt1ElrtQD4LXSNaePPyjRAjyIjAQoKt0Laalke0kjUySo_kwloJyy1aap3cLcrZL9lUUbRTnf6C5f6b61LL5FTl8ZS5NLZI8aBg"
+            thumbnailImageUrl="https://cdn.hk01.com/di/media/images/2889837/org/4ef07fed4a8836f3ed6df68bbfc7d0c9.jpg/nAAal3F-2QSZICGJCFefX31f_bD3NTZhM-WgQjPloEI?v=w1920"
         )
     )
     line_bot_api.reply_message(reply_token, message)
