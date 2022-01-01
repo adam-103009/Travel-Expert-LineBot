@@ -57,10 +57,9 @@ def send_image_message(reply_token, url):
         preview_image_url = url
     )
     line_bot_api.reply_message(reply_token, message)
-def get_url():
+def get_url(url):
     res="輸入“返回”可回到地區選單\n旅遊資訊"
-    response = requests.get(
-    "https://travel.ettoday.net/category/%E5%8F%B0%E5%8C%97/")
+    response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
     titles = soup.find_all("h3", itemprop="headline")
     for title in titles:
