@@ -1,5 +1,4 @@
 import os
-from requests_html import HTMLSession
 from linebot import LineBotApi, WebhookParser
 from linebot.models import (
     MessageEvent,
@@ -11,13 +10,10 @@ from linebot.models import (
     CarouselColumn,
     ImageSendMessage
 )
-
+import requests
+from bs4 import BeautifulSoup
 channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
 
-session = HTMLSession()
-url = "https://www.youtube.com/results?search_query=台中景點"
-response = session.get(url)
-response.html.render(sleep=1, keep_page = True, scrolldown = 0)
 def send_text_message(reply_token, text):
     line_bot_api = LineBotApi(channel_access_token)
     line_bot_api.reply_message(reply_token, TextSendMessage(text=text))
@@ -63,15 +59,12 @@ def send_image_message(reply_token, url):
     line_bot_api.reply_message(reply_token, message)
 def get_url():
     res="輸入“返回”可回到地區選單\n旅遊資訊"
-    c=5
-    link=[]
-    for links in response.html.find('a#video-title'):
-        if c==0:
-            break
-        c-=1
-        link.append(next(iter(links.absolute_links)))
-    for i in range(len(link)):
-        res=res+link[i]+'\n'
+    response = requests.get(
+    "https://travel.ettoday.net/category/%E5%8F%B0%E5%8C%97/")
+    soup = BeautifulSoup(response.text, "html.parser")
+    titles = soup.find_all("h3", itemprop="headline")
+    for title in titles:
+        res=res+title.select_one("a").getText()+'\n'+title.select_one("a").get("href")+'\n'
     return res
 """
 def send_image_url(id, img_url):

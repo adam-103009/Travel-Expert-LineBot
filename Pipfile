@@ -10,6 +10,7 @@ pygraphviz = "*"
 transitions = "*"
 line-bot-sdk = "*"
 requests-html = "*"
+bs4 = "*"
 
 [dev-packages]
 
