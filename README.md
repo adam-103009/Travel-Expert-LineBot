@@ -45,17 +45,20 @@ pip3 install pipenv
 
 pipenv --three
 
-pipenv install
-
 pipenv shell
 ```
-
-* pygraphviz (For visualizing Finite State Machine)
+#### 注意
+在安裝虛擬環境時，透過
 ```sh
-    brew install graphviz
-    pip install pygraphviz
+pipenv install 套件
 ```
-虛擬環境裝好後透過
+一個一個將需要的套件安裝
+其中pygraphviz較特別，需用以下兩個指令
+```sh
+brew install graphviz 
+pipenv run pip install pygraphviz
+```
+虛擬環境和所需套件都裝好後透過
 '''sh
 pip freeze > requirements.txt 將需求套件寫入requirements.txt
 '''
