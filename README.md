@@ -1,5 +1,6 @@
 # TOC Project 2020
-
+##介紹
+由於疫情蔓延，全台灣封閉了兩年。再解封之際，大家想必在思考此時此刻該去哪裡玩。因此設計這個LineBot，可以先從選單選擇想要查詢的地區，在選擇縣市，最後會透過透過爬蟲的方式，來自動抓取「ETtoday旅遊雲」各縣市的近期熱門景點，並且附上網址，來達成簡易搜尋景點的應用，並且由於是利用爬蟲抓取旅遊景點，每個時期推薦的景點都不盡相同，可以達成即時尋找現在熱門景點的功能。
 [![Maintainability](https://api.codeclimate.com/v1/badges/dc7fa47fcd809b99d087/maintainability)](https://codeclimate.com/github/NCKU-CCS/TOC-Project-2020/maintainability)
 
 [![Known Vulnerabilities](https://snyk.io/test/github/NCKU-CCS/TOC-Project-2020/badge.svg)](https://snyk.io/test/github/NCKU-CCS/TOC-Project-2020)
