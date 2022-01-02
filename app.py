@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from machine import create_machine
 
 from fsm import TocMachine
 from utils import send_image_message, send_text_message,send_button_message
@@ -18,181 +19,9 @@ from linebot.models import (
 )
 
 load_dotenv()
+machines = {}
 
 
-machine = TocMachine(
-    states=["choose_area", "choose_city_North","choose_city_East","choose_city_South","choose_city_Middle","Keelung_City","New_Taipei_City","Taipei_City","Taoyuan_City",
-            "Hsinchu","Miaoli","Taichung_City","Changhua","Nantou","Yunlin_County","Chiayi","Tainan_City","Kaohsiung_City","Pingtung","Yilan","Hualien",
-            "Taitung","Penghu_County","Green_Island","Orchid_Island","Kinmen_County","Matsu"],
-    transitions=[
-        {
-            "trigger": "advance",
-            "source": "choose_area",
-            "dest": "choose_city_North",
-            "conditions": "is_going_to_choose_city_North",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_area",
-            "dest": "choose_city_Middle",
-            "conditions": "is_going_to_choose_city_Middle",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_area",
-            "dest": "choose_city_South",
-            "conditions": "is_going_to_choose_city_South",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_area",
-            "dest": "choose_city_East",
-            "conditions": "is_going_to_choose_city_East",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_North",
-            "dest": "Keelung_City",
-            "conditions": "is_going_to_Keelung_City",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_North",
-            "dest": "New_Taipei_City",
-            "conditions": "is_going_to_New_Taipei_City",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_North",
-            "dest": "Taipei_City",
-            "conditions": "is_going_to_Taipei_City",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_North",
-            "dest": "Taoyuan_City",
-            "conditions": "is_going_to_Taoyuan_City",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_North",
-            "dest": "Hsinchu",
-            "conditions": "is_going_to_Hsinchu",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_Middle",
-            "dest": "Miaoli",
-            "conditions": "is_going_to_Miaoli",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_Middle",
-            "dest": "Taichung_City",
-            "conditions": "is_going_to_Taichung_City",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_Middle",
-            "dest": "Changhua",
-            "conditions": "is_going_to_Changhua",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_Middle",
-            "dest": "Nantou",
-            "conditions": "is_going_to_Nantou",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_Middle",
-            "dest": "Yunlin_County",
-            "conditions": "is_going_to_Yunlin_County",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_South",
-            "dest": "Chiayi",
-            "conditions": "is_going_to_Chiayi",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_South",
-            "dest": "Tainan_City",
-            "conditions": "is_going_to_Tainan_City",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_South",
-            "dest": "Kaohsiung_City",
-            "conditions": "is_going_to_Kaohsiung_City",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_South",
-            "dest": "Pingtung",
-            "conditions": "is_going_to_Pingtung",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_North",
-            "dest": "Yilan",
-            "conditions": "is_going_to_Yilan",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_East",
-            "dest": "Hualien",
-            "conditions": "is_going_to_Hualien",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_East",
-            "dest": "Taitung",
-            "conditions": "is_going_to_Taitung",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_East",
-            "dest": "Penghu_County",
-            "conditions": "is_going_to_Penghu_County",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_East",
-            "dest": "Green_Island",
-            "conditions": "is_going_to_Green_Island",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_East",
-            "dest": "Orchid_Island",
-            "conditions": "is_going_to_Orchid_Island",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_East",
-            "dest": "Kinmen_County",
-            "conditions": "is_going_to_Kinmen_County",
-        },
-        {
-            "trigger": "advance",
-            "source": "choose_city_East",
-            "dest": "Matsu",
-            "conditions": "is_going_to_Matsu",
-        },
-        {"trigger": "advance",
-         "source": ["choose_city_North","choose_city_East","choose_city_South","choose_city_Middle","Keelung_City","New_Taipei_City","Taipei_City","Taoyuan_City",
-            "Hsinchu","Miaoli","Taichung_City","Changhua","Nantou","Yunlin_County","Chiayi","Tainan_City","Kaohsiung_City","Pingtung","Yilan","Hualien",
-            "Taitung","Penghu_County","Green_Island","Orchid_Island","Kinmen_County","Matsu"], 
-         "dest": "choose_area",
-         "conditions": "is_going_to_choose_area"
-        },
-    ],
-    initial="choose_area",
-    auto_transitions=False,
-    show_conditions=True,
-)
 
 app = Flask(__name__, static_url_path="")
 
@@ -232,13 +61,13 @@ def webhook_handler():
             continue
         if not isinstance(event.message.text, str):
             continue
-        print("\nFSM STATE:"+machine.state)
-        print("REQUEST BODY: \n"+body)
-        response = machine.advance(event)
+        if event.source.user_id not in machines:
+            machines[event.source.user_id] = create_machine()
+        response = machines[event.source.user_id].advance(event)
         if response == False:
             if event.message.text.lower()=='fsm':
                 send_image_message(event.reply_token,'https://travel-expert-libebot.herokuapp.com/show-fsm')
-            if machine.state=="choose_area":
+            if machines[event.source.user_id].state=="choose_area":
                 title="選擇你想查詢的地區"
                 text="北、中、南、東"
                 btn = [
@@ -260,8 +89,8 @@ def webhook_handler():
                     ),
                 ]
                 send_button_message(event.reply_token, title, text, btn)
-            elif (machine.state=="choose_city_North" or machine.state=="choose_city_East" or 
-                machine.state=="choose_city_Middle"or machine.state=="choose_city_South"):
+            elif (machines[event.source.user_id].state=="choose_city_North" or machines[event.source.user_id].state=="choose_city_East" or 
+                machines[event.source.user_id].state=="choose_city_Middle"or machines[event.source.user_id].state=="choose_city_South"):
                 send_text_message(event.reply_token,"請選擇想要查詢的城市\n或者輸入想查詢的城市名稱\n輸入「返回」可回到地區選擇選單")
 
 
