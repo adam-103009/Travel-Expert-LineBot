@@ -2,6 +2,14 @@
 ## 介紹
 由於疫情蔓延，全台灣封閉了兩年。再解封之際，大家想必在思考此時此刻該去哪裡玩。因此設計這個LineBot，可以先從選單選擇想要查詢的地區，在選擇縣市，最後會透過透過爬蟲的方式，來自動抓取「ETtoday旅遊雲」各縣市的近期熱門景點，並且附上網址，來達成簡易搜尋景點的應用，並且由於是利用爬蟲抓取旅遊景點，每個時期推薦的景點都不盡相同，可以達成即時尋找現在熱門景點的功能。
 
+## 技術
+Beautifulsoup4爬取ETtoday旅遊雲各縣市的當季熱門景點
+Heroku部署
+
+## 環境
+macos 12.1
+python 3.9.9
+
 ## 功能
 ### 傳送任意訊息，將會出現地區選單
 ![image](./img/IMG_5351.PNG)
@@ -27,9 +35,8 @@ More details in the [Slides](https://hackmd.io/@TTW/ToC-2019-Project#) and [FAQ]
 ## Setup
 
 ### Prerequisite
-* Python 3.6
+* Python 3.9
 * Pipenv
-* Facebook Page and App
 * HTTPS Server
 
 #### Install Dependency
@@ -44,10 +51,14 @@ pipenv shell
 ```
 
 * pygraphviz (For visualizing Finite State Machine)
-    * [Setup pygraphviz on Ubuntu](http://www.jianshu.com/p/a3da7ecc5303)
-	* [Note: macOS Install error](https://github.com/pygraphviz/pygraphviz/issues/100)
-
-
+'''sh
+    brew install graphviz
+    pip install pygraphviz
+'''
+虛擬環境裝好後透過
+'''sh
+pip freeze > requirements.txt 將需求套件寫入requirements.txt
+'''
 #### Secret Data
 You should generate a `.env` file to set Environment Variables refer to our `.env.sample`.
 `LINE_CHANNEL_SECRET` and `LINE_CHANNEL_ACCESS_TOKEN` **MUST** be set to proper values.
