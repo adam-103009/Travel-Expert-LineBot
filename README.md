@@ -7,7 +7,7 @@ Beautifulsoup4爬取ETtoday旅遊雲各縣市的當季熱門景點
 Heroku部署
 
 ## 環境
-macos 12.1
+macos 12.1. 
 python 3.9.9
 
 ## 功能
