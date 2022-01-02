@@ -66,9 +66,9 @@ def webhook_handler():
         response = machines[event.source.user_id].advance(event)
         if response == False:
             if event.message.text.lower()=='fsm':
-                send_image_message(event.reply_token,'https://travel-expert-libebot.herokuapp.com/show-fsm')
+                send_image_message(event.reply_token,'https://i.imgur.com/1ctsuSs.png')
             if machines[event.source.user_id].state=="choose_area":
-                title="選擇你想查詢的地區"
+                title="選擇你想查詢的地區或輸入Fsm將顯示Fsm圖"
                 text="北、中、南、東"
                 btn = [
                     MessageTemplateAction(
@@ -98,10 +98,10 @@ def webhook_handler():
     return "OK"
 
 
-@app.route("/show-fsm", methods=["GET"])
+'''@app.route("/show-fsm", methods=["GET"])
 def show_fsm():
     machine.get_graph().draw("fsm.png", prog="dot", format="png")
-    return send_file("fsm.png", mimetype="image/png")
+    return send_file("fsm.png", mimetype="image/png")'''
 
 
 if __name__ == "__main__":

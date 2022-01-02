@@ -18,7 +18,6 @@ from linebot.models import (
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
-
     def is_going_to_choose_city_North(self, event):
         return event.message.text == "北部" 
     def is_going_to_choose_city_Middle(self, event):
@@ -77,7 +76,7 @@ class TocMachine(GraphMachine):
     
     def on_enter_choose_area(self,event):
         #send_text_message(event.reply_token,"rechoose city")
-        title="選擇你想查詢的地區"
+        title="選擇你想查詢的地區或輸入Fsm將顯示Fsm圖"
         text="北、中、南、東"
         btn = [
             MessageTemplateAction(
@@ -376,8 +375,7 @@ class TocMachine(GraphMachine):
                     action=
                         PostbackTemplateAction(
                         label = '返回',
-                        text = '返回',
-                        data='action=buy&itemid=7'
+                        text = '返回'
                         )
                     
                     )
