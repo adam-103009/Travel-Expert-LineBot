@@ -4,7 +4,7 @@
 
 ## 功能
 首先：傳送任意訊息，將會出現地區選單
-!(./img/IMG_5351.PNG)
+!「image[(./img/IMG_5351.PNG)
 [![Maintainability](https://api.codeclimate.com/v1/badges/dc7fa47fcd809b99d087/maintainability)](https://codeclimate.com/github/NCKU-CCS/TOC-Project-2020/maintainability)
 
 [![Known Vulnerabilities](https://snyk.io/test/github/NCKU-CCS/TOC-Project-2020/badge.svg)](https://snyk.io/test/github/NCKU-CCS/TOC-Project-2020)
