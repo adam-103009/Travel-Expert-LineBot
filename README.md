@@ -59,9 +59,9 @@ brew install graphviz
 pipenv run pip install pygraphviz
 ```
 虛擬環境和所需套件都裝好後透過
-'''sh
+```sh
 pip freeze > requirements.txt 將需求套件寫入requirements.txt
-'''
+```
 #### Secret Data
 You should generate a `.env` file to set Environment Variables refer to our `.env.sample`.
 `LINE_CHANNEL_SECRET` and `LINE_CHANNEL_ACCESS_TOKEN` **MUST** be set to proper values.
