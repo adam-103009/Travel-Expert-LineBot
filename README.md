@@ -12,7 +12,7 @@ python 3.9.9
 
 ## 功能
 ### 傳送任意訊息，將會出現地區選單
-![image](./img/IMG_5351.PNG)
+![image](./img/IMG_5359.PNG)
 ### 點選想要查詢的地區，將會出現縣市選單
 ![image](./img/IMG_5352.PNG)
 ![image](./img/IMG_5353.PNG)
