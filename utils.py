@@ -59,12 +59,12 @@ def send_image_message(reply_token, url):
     )
     line_bot_api.reply_message(reply_token, message)
 def get_url(url):
-    res="輸入“返回”可回到地區選單\n旅遊資訊\n"
+    res="輸入“返回”可回到地區選單\n\n旅遊資訊\n"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
     titles = soup.find_all("h3", itemprop="headline")
     for title in titles:
-        res='\n'+res+title.select_one("a").getText()+'\n'+title.select_one("a").get("href")+'\n'
+        res=res+title.select_one("a").getText()+'\n'+title.select_one("a").get("href")+'\n\n'
     return res
 """
 def send_image_url(id, img_url):

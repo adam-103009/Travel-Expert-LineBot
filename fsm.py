@@ -11,6 +11,9 @@ from linebot.models import (
     MessageTemplateAction,
     CarouselTemplate, 
     CarouselColumn,
+    ImageCarouselTemplate,
+    PostbackTemplateAction,
+    ImageCarouselColumn
 )
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
@@ -102,80 +105,65 @@ class TocMachine(GraphMachine):
         line_bot_api = LineBotApi(channel_access_token)
         template_message = TemplateSendMessage(
             alt_text='carousel template',
-            template = CarouselTemplate(
-                columns=[
-                    CarouselColumn(
-                    thumbnailImageUrl='https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2021/12/05/realtime/14696448.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=800&exp=3600',
-                    title="基隆市",
-                    text="查詢基隆市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text ='基隆市'
+            template = ImageCarouselTemplate(
+                 columns=[
+                    ImageCarouselColumn(
+                        image_url='https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2021/12/05/realtime/14696448.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=800&exp=3600',
+                        action=PostbackTemplateAction(
+                            label='基隆市',
+                            text='基隆市',
+                            data='action=buy&itemid=1'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="新北市",
-                    text="查詢新北市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '新北市'
+                    ImageCarouselColumn(
+                        image_url='https://img.ltn.com.tw/Upload/news/600/2020/12/30/3397139_1_1.jpg',
+                        action=PostbackTemplateAction(
+                            label='新北市',
+                            text = '新北市',
+                            data='action=buy&itemid=2'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="台北市",
-                    text="查詢台北市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '台北市'
+                    ImageCarouselColumn(
+                    image_url='https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2016/10/19/99/2734166.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=800&exp=3600',
+                    action=PostbackTemplateAction(
+                        label = '台北市',
+                        text = '台北市',
+                        data='action=buy&itemid=3'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="桃園市",
-                    text="查詢桃園市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '桃園市'
+                    ImageCarouselColumn(
+                    image_url='https://www.taiwan.net.tw/pic.ashx?qp=1/big_scenic_spots/pic_A12-00161_11.jpg&sizetype=3',
+                    action=PostbackTemplateAction(
+                        label = '桃園市',
+                        text = '桃園市',
+                        data='action=buy&itemid=4'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="新竹縣/市",
-                    text="查詢新竹縣/市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '新竹縣/市'
+                     ImageCarouselColumn(
+                    image_url='https://www.mook.com.tw/images/upload/article/18052/A18052_1528096840_2.jpg',
+                    action=PostbackTemplateAction(
+                        label = '新竹縣/市',
+                        text = '新竹縣/市',
+                        data='action=buy&itemid=5'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="宜蘭縣/市",
-                    text="查詢宜蘭縣/市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '宜蘭縣/市'
+                    ImageCarouselColumn(
+                    image_url='https://shire16.tw/wp-content/uploads/2015/05/8220120709165609-1.jpg',
+                    action=PostbackTemplateAction(
+                        label = '宜蘭縣/市',
+                        text = '宜蘭縣/市',
+                        data='action=buy&itemid=6'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="重新選擇地區",
-                    text="北、中、南、東、離島",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '返回'
+                    ImageCarouselColumn(
+                    image_url='https://lh3.googleusercontent.com/proxy/0xS_j3uBWHxLuuspte2TAV8YFd3hxOuko2gR4yHGBilAQoAs5muwhCHFty3iBxO0Ttq32AlhIWaUYXqYL12kwg-IH-YtZHkuJOT4xQ',
+                    action=PostbackTemplateAction(
+                        label = '返回',
+                        text = '返回',
+                        data='action=buy&itemid=7'
                         )
-                    ]
                     )
-                ]
+        ]
             )
         )         
         line_bot_api.reply_message(event.reply_token,template_message)
@@ -185,67 +173,62 @@ class TocMachine(GraphMachine):
         line_bot_api = LineBotApi(channel_access_token)
         template_message = TemplateSendMessage(
             alt_text='carousel template',
-            template = CarouselTemplate(
+            template = ImageCarouselTemplate(
                 columns=[
-                    CarouselColumn(
-                    title="苗栗縣/市",
-                    text="查詢苗栗縣/市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text ='苗栗縣/市'
+                    ImageCarouselColumn(
+                    image_url='https://i0.wp.com/blog.kkday.com/wp-content/uploads/batch_shutterstock_1519764494.jpg?resize=900%2C600&quality=80&strip=all&ssl=1',
+                    action=
+                        PostbackTemplateAction(
+                        label = '苗栗縣/市',
+                        text ='苗栗縣/市',
+                        data='action=buy&itemid=1'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="台中市",
-                    text="查詢台中市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '台中市'
+                    ImageCarouselColumn(
+                    image_url='https://www.taichung.gov.tw/media/402339/%E6%98%A5%E7%AF%80%E9%81%8A%E5%8F%B0%E4%B8%AD-%E8%A7%80%E6%97%85%E5%B1%80%E5%BB%BA%E8%AD%B0%E7%86%B1%E9%96%80%E8%A7%80%E5%85%89%E6%99%AF%E9%BB%9E.jpg?width=400',
+                    action=
+                        PostbackTemplateAction(
+                        label = '台中市',
+                        text = '台中市',
+                        data='action=buy&itemid=1'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="彰化縣/市",
-                    text="查詢彰化縣/市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '彰化縣/市'
+                    ImageCarouselColumn(
+                    image_url='https://cc.tvbs.com.tw/img/program/upload/2018/06/04/20180604185637-442e65bd.jpg',
+                    action=
+                        PostbackTemplateAction(
+                        label = '彰化縣/市',
+                        text = '彰化縣/市',
+                        data='action=buy&itemid=1'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="南投縣/市",
-                    text="查詢南投縣/市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '南投縣/市'
+                    ImageCarouselColumn(
+                    image_url='https://margaret.tw/wp-content/uploads/nEO_IMG_P2340089.jpg',
+                    action=
+                        PostbackTemplateAction(
+                        label = '南投縣/市',
+                        text = '南投縣/市',
+                        data='action=buy&itemid=1'
                         )
-                    ]
+                    
                     ),
-                    CarouselColumn(
-                    title="雲林縣",
-                    text="查詢雲林縣旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '雲林縣'
-                        )
-                    ]
+                    ImageCarouselColumn(
+                    image_url='https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_103660/20200929105846_FbgHj/jpg',
+                    action=
+                        PostbackTemplateAction(
+                        label = '雲林縣',
+                        text = '雲林縣',
+                        data='action=buy&itemid=1'
+                        ) 
                     ),
-                    CarouselColumn(
-                    title="重新選擇地區",
-                    text="北、中、南、東、離島",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '返回'
+                    ImageCarouselColumn(
+                    image_url='https://lh3.googleusercontent.com/proxy/0xS_j3uBWHxLuuspte2TAV8YFd3hxOuko2gR4yHGBilAQoAs5muwhCHFty3iBxO0Ttq32AlhIWaUYXqYL12kwg-IH-YtZHkuJOT4xQ',
+                    action=
+                        PostbackTemplateAction(
+                        label = '返回',
+                        text = '返回',
+                        data='action=buy&itemid=1'
                         )
-                    ]
                     )
                 ]
             )
@@ -254,61 +237,56 @@ class TocMachine(GraphMachine):
         send_text_message(event.reply_token,"your choose:"+event.message.text)
     def on_enter_choose_city_South(self, event):
         print("I'm entering choose_city_South")
-        self.turn_to_initial(event)
         channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
         line_bot_api = LineBotApi(channel_access_token)
         template_message = TemplateSendMessage(
             alt_text='carousel template',
-            template = CarouselTemplate(
+            template = ImageCarouselTemplate(
                 columns=[
-                    CarouselColumn(
-                    title="台南市",
-                    text="查詢台南市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text ='台南市'
+                    ImageCarouselColumn(
+                    image_url='https://blog.tripbaa.com/wp-content/uploads/2018/01/4-4.jpg',
+                    action=
+                        PostbackTemplateAction(
+                        label = '台南市',
+                        text ='台南市',
+                        data='action=buy&itemid=1'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="高雄市",
-                    text="查詢高雄市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '高雄市'
+                    ImageCarouselColumn(
+                    image_url='https://static.taisounds.com/WebUpd/TaiSounds/society/kao.jpg',
+                    action=
+                        PostbackTemplateAction(
+                        label = '高雄市',
+                        text = '高雄市',
+                        data='action=buy&itemid=1'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="屏東縣/市",
-                    text="查詢屏東縣/市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '屏東縣/市'
+                    ImageCarouselColumn(
+                    image_url='https://owlting-blog-media.s3.ap-northeast-1.amazonaws.com/wp-content/uploads/2020/03/26235802/shutterstock_1557680306.jpg',
+                    action=
+                        PostbackTemplateAction(
+                        label = '屏東縣/市',
+                        text = '屏東縣/市',
+                        data='action=buy&itemid=1'
                         )
-                    ]
+
                     ),
-                    CarouselColumn(
-                    title="嘉義縣/市",
-                    text="查詢嘉義縣/市旅遊資訊",
-                    actions=[MessageTemplateAction(
-                        label = '確認',
-                        text = '嘉義縣/市'
+                    ImageCarouselColumn(
+                    image_url='https://nurseilife.cc/wp-content/uploads/2015-01-04-100952-3.jpg',
+                    action=PostbackTemplateAction(
+                        label = '嘉義縣/市',
+                        text = '嘉義縣/市',
+                        data='action=buy&itemid=1'
                         )
-                    ]
                     ),
-                    CarouselColumn(
-                    title="重新選擇地區",
-                    text="北、中、南、東、離島",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '返回'
+                    ImageCarouselColumn(
+                    image_url='https://lh3.googleusercontent.com/proxy/0xS_j3uBWHxLuuspte2TAV8YFd3hxOuko2gR4yHGBilAQoAs5muwhCHFty3iBxO0Ttq32AlhIWaUYXqYL12kwg-IH-YtZHkuJOT4xQ',
+                    action=
+                        PostbackTemplateAction(
+                        label = '返回',
+                        text = '返回',
+                        data='action=buy&itemid=1'
                         )
-                    ]
                     )
                 ]
             )
@@ -321,87 +299,87 @@ class TocMachine(GraphMachine):
         line_bot_api = LineBotApi(channel_access_token)
         template_message = TemplateSendMessage(
             alt_text='carousel template',
-            template = CarouselTemplate(
+            template = ImageCarouselTemplate(
                 columns=[
-                    CarouselColumn(
-                    title="花蓮縣/市",
-                    text="查詢花蓮縣/市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text ='花蓮縣/市'
+                    ImageCarouselColumn(
+                    image_url='https://im.marieclaire.com.tw/m800c533h100b0/assets/mc/202002/5E4ABDFA2F9F41581956602.jpeg',
+                    action=
+                        PostbackTemplateAction(
+                        label = '花蓮縣/市',
+                        text ='花蓮縣/市',
+                        data='action=buy&itemid=7'
                         )
-                    ]
+                    
                     ),
-                    CarouselColumn(
-                    title="台東縣/市",
-                    text="查詢台東縣/市旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '台東縣/市'
+                    ImageCarouselColumn(
+                    image_url='https://im.marieclaire.com.tw/m800c533h100b0/assets/mc/202003/5E80DFCA5AAE61585504202.jpeg',
+                    action=
+                        PostbackTemplateAction(
+                        label = '台東縣/市',
+                        text = '台東縣/市',
+                        data='action=buy&itemid=7'
                         )
-                    ]
+                    
                     ),
-                    CarouselColumn(
-                    title="澎湖縣",
-                    text="查詢澎湖縣旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '澎湖縣'
+                    ImageCarouselColumn(
+                    image_url='https://photo.travelking.com.tw/scenery/2F43B3A0-1495-4B96-A961-C08350DAF43F_d.jpg',
+                    action=
+                        PostbackTemplateAction(
+                        label = '澎湖縣',
+                        text = '澎湖縣',
+                        data='action=buy&itemid=7'
                         )
-                    ]
+                    
                     ),
-                    CarouselColumn(
-                    title="綠島",
-                    text="查詢綠島旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '綠島'
+                    ImageCarouselColumn(
+                    image_url='https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_123118/20210923082907_q5z4b/jpg',
+                    action=
+                        PostbackTemplateAction(
+                        label = '綠島',
+                        text = '綠島',
+                        data='action=buy&itemid=7'
                         )
-                    ]
+                    
                     ),
-                    CarouselColumn(
-                    title="蘭嶼",
-                    text="查詢蘭嶼旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '蘭嶼'
+                    ImageCarouselColumn(
+                    image_url='https://i0.wp.com/blog.kkday.com/wp-content/uploads/batch_Taiwan_Orchid-Island-_AShutterstock_1542646931.jpg?fit=900%2C600&quality=80&strip=all&ssl=1',
+                    action=
+                        PostbackTemplateAction(
+                        label = '蘭嶼',
+                        text = '蘭嶼',
+                        data='action=buy&itemid=7'
                         )
-                    ]
+                    
                     ),
-                    CarouselColumn(
-                    title="金門",
-                    text="查詢金門旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '金門'
+                    ImageCarouselColumn(
+                    image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7vDK8P0IH12JF3yCsjGu5MWJSXyKBDRnSj-JceoPOfyjqpcxPcHUjoQrpKvIs-muAPHs&usqp=CAU',
+                    action=
+                        PostbackTemplateAction(
+                        label = '金門',
+                        text = '金門',
+                        data='action=buy&itemid=7'
                         )
-                    ]
+                    
                     ),
-                    CarouselColumn(
-                    title="馬祖",
-                    text="查詢馬祖旅遊資訊",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '馬祖'
+                    ImageCarouselColumn(
+                    image_url='https://www.gomaji.com/blog/wp-content/uploads/2020/11/104219017_717158279098466_2719060153688610261_n.jpg',
+                    action=
+                        PostbackTemplateAction(
+                        label = '馬祖',
+                        text = '馬祖',
+                        data='action=buy&itemid=7'
                         )
-                    ]
+                    
                     ),
-                    CarouselColumn(
-                    title="重新選擇地區",
-                    text="北、中、南、東、離島",
-                    actions=[
-                        MessageTemplateAction(
-                        label = '確認',
-                        text = '返回'
+                    ImageCarouselColumn(
+                    image_url='https://lh3.googleusercontent.com/proxy/0xS_j3uBWHxLuuspte2TAV8YFd3hxOuko2gR4yHGBilAQoAs5muwhCHFty3iBxO0Ttq32AlhIWaUYXqYL12kwg-IH-YtZHkuJOT4xQ',
+                    action=
+                        PostbackTemplateAction(
+                        label = '返回',
+                        text = '返回',
+                        data='action=buy&itemid=7'
                         )
-                    ]
+                    
                     )
                 ]
             )
